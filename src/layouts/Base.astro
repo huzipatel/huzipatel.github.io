@@ -1,0 +1,76 @@
+---
+import '../styles/global.css';
+export interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Huzi Patel — Solution Architect & Applied AI',
+  description = 'Huzi Patel. Solution architect building AI-driven products in the public sector and smart cities. Westminster City Council, Connexin, Remote Sense.',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Huzi Patel',
+      jobTitle: 'Solution Architect',
+      email: 'mailto:huzaifa@live.co.uk',
+      alumniOf: 'Imperial College London',
+      worksFor: { '@type': 'Organization', name: 'Westminster City Council' },
+      url: Astro.site?.toString(),
+    })} />
+  </head>
+  <body class="min-h-screen grain">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-accent focus:text-ink focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
+    <header class="sticky top-0 z-40 backdrop-blur bg-ink/70 border-b border-line">
+      <nav class="max-w-5xl mx-auto px-5 h-14 flex items-center justify-between">
+        <a href="/" class="font-mono text-sm tracking-tight text-head">
+          <span class="text-accent">~/</span>huzi.patel
+        </a>
+        <div class="flex items-center gap-5 text-sm text-mute">
+          <a href="/#work" class="hover:text-head transition-colors">Work</a>
+          <a href="/#experience" class="hover:text-head transition-colors">Experience</a>
+          <a href="/#about" class="hover:text-head transition-colors">About</a>
+          <a href="mailto:huzaifa@live.co.uk" class="hidden sm:inline text-head border border-line hover:border-accent px-3 py-1.5 rounded-md transition-colors">Contact</a>
+        </div>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer class="border-t border-line mt-24">
+      <div class="max-w-5xl mx-auto px-5 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-mute">
+        <div class="font-mono">
+          <span class="text-accent">$</span> whoami
+          <span class="text-head ml-2">huzi patel</span>
+        </div>
+        <div class="flex items-center gap-5">
+          <a href="mailto:huzaifa@live.co.uk" class="hover:text-head">huzaifa@live.co.uk</a>
+          <a href="tel:+447960520013" class="hover:text-head">+44 796 052 0013</a>
+          <a href="https://www.linkedin.com/in/huzipatel" class="hover:text-head" rel="me">LinkedIn</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

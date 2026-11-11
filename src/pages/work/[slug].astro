@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import { projects } from '../../data/projects.ts';
+
+export function getStaticPaths() {
+  return projects.map(p => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const idx = projects.findIndex(p => p.slug === project.slug);
+const next = projects[(idx + 1) % projects.length];
+---
+<Base title={`${project.title} — Huzi Patel`} description={project.tagline}>
+  <article class="max-w-3xl mx-auto px-5 pt-16 pb-24">
+    <a href="/#work" class="inline-flex items-center gap-2 font-mono text-xs text-mute hover:text-accent transition-colors mb-10">
+      <span>←</span> back to work
+    </a>
+
+    <div class="font-mono text-xs text-accent mb-4">{project.org} · {project.period}</div>
+    <h1 class="font-display text-4xl sm:text-5xl text-head leading-tight mb-6">{project.title}</h1>
+    <p class="text-xl text-mute leading-relaxed mb-8">{project.tagline}</p>
+
+    <div class="flex flex-wrap gap-1.5 mb-12">
+      {project.tags.map((t: string) => (
+        <span class="text-[11px] font-mono text-mute border border-line rounded px-2 py-1">{t}</span>
+      ))}
+    </div>
+
+    <div class="dotline h-px mb-12"></div>
+
+    <div class="space-y-12">
+      <section>
+        <div class="font-mono text-xs text-accent mb-3">// summary</div>
+        <p class="text-text leading-relaxed">{project.summary}</p>
+      </section>
+
+      <section>
+        <div class="font-mono text-xs text-accent mb-3">// role</div>
+        <p class="text-text leading-relaxed">{project.role}</p>
+      </section>
+
+      <section>
+        <div class="font-mono text-xs text-accent mb-3">// problem</div>
+        <p class="text-text leading-relaxed">{project.problem}</p>
+      </section>
+
+      <section>
+        <div class="font-mono text-xs text-accent mb-3">// approach</div>
+        <ol class="space-y-3">
+          {project.approach.map((a: string, i: number) => (
+            <li class="flex gap-4 text-text leading-relaxed">
+              <span class="font-mono text-xs text-mute pt-1 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+              <span>{a}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section>
+        <div class="font-mono text-xs text-accent mb-3">// stack</div>
+        <div class="flex flex-wrap gap-2">
+          {project.stack.map((s: string) => (
+            <span class="text-sm font-mono text-text bg-panel border border-line rounded-md px-3 py-1.5">{s}</span>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <div class="font-mono text-xs text-accent mb-3">// outcome</div>
+        <ul class="space-y-3">
+          {project.outcome.map((o: string) => (
+            <li class="flex gap-3 text-text leading-relaxed">
+              <span class="text-accent mt-1.5 shrink-0">▹</span>
+              <span>{o}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+
+    <div class="dotline h-px mt-16 mb-10"></div>
+
+    <a href={`/work/${next.slug}/`} class="group block bg-panel hover:bg-panel-2 border border-line hover:border-accent/40 rounded-lg p-6 transition-colors">
+      <div class="font-mono text-xs text-mute mb-2">next →</div>
+      <div class="font-display text-xl text-head group-hover:text-accent transition-colors">{next.title}</div>
+      <div class="text-sm text-mute mt-1">{next.org}</div>
+    </a>
+  </article>
+</Base>
