@@ -1,20 +1,22 @@
 ---
 import Base from '../layouts/Base.astro';
+import LogoWall from '../components/LogoWall.astro';
 import { projects } from '../data/projects.ts';
+import { testimonials } from '../data/employers.ts';
 
 const experience = [
   {
-    org: 'UK local authority',
+    org: 'Westminster City Council',
     role: 'Solution Architect / IoT Tech Lead',
     period: 'Jan 2024 — Present',
     location: 'London, UK',
     bullets: [
-      'Conceived and delivered a self-directed revenue initiative — vision-language model over street-level imagery — that surfaced a seven-figure annual uplift in rateable value. Now being commercialised to other UK authorities.',
-      'Recovered a city-scale LoRaWAN gateway estate from supplier lock-in; six-figure saving ahead of re-tender.',
-      'Orchestrated a shared computer-vision platform (bin-truck vision) via high-level design and cross-functional championing.',
+      'Conceived and delivered a self-directed revenue initiative — vision-language model + Google Street View — that uncovered £2–4m of additional annual rateable value. Now being commercialised to other UK councils.',
+      'Recovered the housing LoRaWAN gateway estate from supplier lock-in; saved £200k+ in commercial costs ahead of re-tender.',
+      'Orchestrated a cross-council computer vision platform (bin truck vision) via high-level design and cross-functional championing.',
       'Pioneered a prototype-driven product development process with service teams.',
       "Spearheaded the organisation's IoT Maturity Model, reducing vendor lock-in and improving rationalisation.",
-      'Led technical architecture for the organisation\'s participation in a city-wide public WiFi programme.',
+      "Led technical architecture for Connected London / OpenRoaming public WiFi (Mayor's Office initiative).",
       'Stepped in as data engineer during a short-staffed stretch — Python + Kubernetes cron jobs on Azure ingesting third-party time-series APIs into InfluxDB — preventing a 3-month roadmap slip.',
     ],
   },
@@ -56,59 +58,120 @@ const experience = [
     ],
   },
 ];
+
+const services = [
+  {
+    title: 'Applied AI prototypes',
+    body: 'Zero-to-one prototypes that de-risk an AI product before you commit a team to it. I design, build and demo the thing — and shape the business case around it.',
+    tags: ['VLMs', 'LLM pipelines', 'Evaluation'],
+  },
+  {
+    title: 'Solution architecture',
+    body: 'End-to-end architecture for IoT, data and AI systems. C4 diagrams, threat modelling, supplier selection, governance — the full stack a serious programme needs.',
+    tags: ['C4', 'Threat modelling', 'TDF / ARB'],
+  },
+  {
+    title: 'IoT & smart city delivery',
+    body: 'Device-to-cloud design for LoRaWAN / 5G / Edge AI programmes. I have lived inside RFPs for water, waste and public realm — I know what makes them land.',
+    tags: ['LoRaWAN', 'Edge AI', 'Smart City'],
+  },
+  {
+    title: 'Technical advisory',
+    body: 'Fractional architect / tech lead on retainer. Second opinion on a programme in trouble, a review of your AI roadmap, or a credible voice in a supplier negotiation.',
+    tags: ['Advisory', 'Reviews', 'Supplier strategy'],
+  },
+];
+
+const approach = [
+  {
+    step: '01',
+    title: 'Understand the actual problem',
+    body: 'Discovery with the people doing the work, not the people writing the brief. The business case is usually hiding somewhere else.',
+  },
+  {
+    step: '02',
+    title: 'Prototype before promising',
+    body: 'A rough, working prototype resolves ten arguments cheaper than a steering committee. I build early, demo often.',
+  },
+  {
+    step: '03',
+    title: 'Architect for the second user',
+    body: 'Design for the team that will inherit the system, not the one that built it. Governance, documentation, and a honest view of risk.',
+  },
+  {
+    step: '04',
+    title: 'Ship, measure, hand over',
+    body: 'An AI prototype that never reaches production is an expensive demo. I stay in long enough that the thing survives me.',
+  },
+];
 ---
 <Base>
   <!-- HERO -->
-  <section class="max-w-5xl mx-auto px-5 pt-20 pb-24">
-    <div class="font-mono text-xs text-accent mb-6 tracking-wide">
-      <span class="opacity-60">#</span> solution architect / applied ai
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none opacity-[0.35]">
+      <div class="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(123,209,184,0.35), transparent 60%);"></div>
+      <div class="absolute top-20 right-0 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(163,139,252,0.22), transparent 60%);"></div>
     </div>
-    <h1 class="font-display text-5xl sm:text-6xl md:text-7xl text-head leading-[1.05] tracking-tight mb-8">
-      I turn <em class="text-accent not-italic">AI prototypes</em> into
-      shipped products inside messy, high-stakes organisations.
-    </h1>
-    <p class="text-lg text-mute max-w-2xl leading-relaxed mb-10">
-      I'm Huzi. Currently solution architect and IoT tech lead at a UK local authority — most recently I used a vision-language model over street-level imagery to surface a seven-figure annual uplift in business rates, then turned the prototype into a shipped product. Before that: Smart City architecture at Connexin, serverless industrial IoT at Remote Sense. MEng, Imperial College London.
-    </p>
-    <div class="flex flex-wrap gap-3">
-      <a href="#work" class="inline-flex items-center gap-2 bg-accent text-ink px-4 py-2.5 rounded-md font-medium hover:bg-accent/90 transition-colors">
-        See the work
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a href="mailto:huzaifa@live.co.uk" class="inline-flex items-center gap-2 border border-line text-head px-4 py-2.5 rounded-md font-medium hover:border-accent transition-colors">
-        Get in touch
-      </a>
-    </div>
+    <div class="relative max-w-5xl mx-auto px-5 pt-24 pb-20">
+      <div class="font-mono text-xs text-accent mb-6 tracking-[0.2em] uppercase">
+        <span class="opacity-60">//</span> Solution Architecture &middot; Applied AI &middot; IoT
+      </div>
+      <h1 class="font-display text-5xl sm:text-6xl md:text-7xl text-head leading-[1.02] tracking-tight mb-8 max-w-4xl">
+        AI prototypes, shipped into <em class="text-accent not-italic">messy, high-stakes</em> organisations.
+      </h1>
+      <p class="text-lg text-mute max-w-2xl leading-relaxed mb-10">
+        I'm Huzi Patel. A solution architect and applied-AI practitioner working at the point where ambitious prototypes meet real procurement, real governance, and real users. Currently IoT tech lead at Westminster City Council. Available for selected advisory and delivery engagements.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="#work" class="inline-flex items-center gap-2 bg-accent text-ink px-5 py-3 rounded-md font-medium hover:bg-accent/90 transition-colors shadow-lg shadow-accent/10">
+          See the work
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#services" class="inline-flex items-center gap-2 bg-panel border border-line text-head px-5 py-3 rounded-md font-medium hover:border-accent hover:bg-panel-2 transition-colors">
+          How I can help
+        </a>
+      </div>
 
-    <!-- stats strip -->
-    <div class="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-line pt-8">
-      <div>
-        <div class="font-display text-3xl text-head">7-figure</div>
-        <div class="text-xs text-mute mt-1">annual rateable value uplift</div>
-      </div>
-      <div>
-        <div class="font-display text-3xl text-head">6-figure</div>
-        <div class="text-xs text-mute mt-1">saved via IoT estate recovery</div>
-      </div>
-      <div>
-        <div class="font-display text-3xl text-head">150k+</div>
-        <div class="text-xs text-mute mt-1">water meters in winning RFP</div>
-      </div>
-      <div>
-        <div class="font-display text-3xl text-head">6 yrs</div>
-        <div class="text-xs text-mute mt-1">solution architecture</div>
+      <!-- stats strip -->
+      <div class="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-line pt-8">
+        <div>
+          <div class="font-display text-3xl text-head">£2–4m</div>
+          <div class="text-[11px] text-text/70 mt-2 leading-snug">annual rateable value uncovered</div>
+        </div>
+        <div>
+          <div class="font-display text-3xl text-head">£200k+</div>
+          <div class="text-[11px] text-text/70 mt-2 leading-snug">saved via IoT estate recovery</div>
+        </div>
+        <div>
+          <div class="font-display text-3xl text-head">150k+</div>
+          <div class="text-[11px] text-text/70 mt-2 leading-snug">meters in winning Smart City RFP</div>
+        </div>
+        <div>
+          <div class="font-display text-3xl text-head">6 yrs</div>
+          <div class="text-[11px] text-text/70 mt-2 leading-snug">solution architecture</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- WORK -->
-  <section id="work" class="max-w-5xl mx-auto px-5 py-16 scroll-mt-20">
-    <div class="flex items-end justify-between mb-10">
-      <div>
-        <div class="font-mono text-xs text-accent mb-2">// selected work</div>
-        <h2 class="font-display text-4xl text-head">Case studies</h2>
+  <!-- TRUSTED BY -->
+  <section class="border-y border-line bg-panel/40">
+    <div class="max-w-5xl mx-auto px-5 py-10">
+      <div class="font-mono text-[11px] tracking-[0.2em] uppercase text-mute text-center mb-6">
+        &sect; Previously, &amp; currently
       </div>
-      <div class="text-sm text-mute hidden sm:block">{projects.length} projects</div>
+      <LogoWall variant="strip" />
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work" class="max-w-5xl mx-auto px-5 py-24 scroll-mt-20">
+    <div class="flex items-end justify-between mb-12">
+      <div>
+        <div class="font-mono text-xs text-accent mb-2 tracking-[0.2em] uppercase">// Selected work</div>
+        <h2 class="font-display text-4xl sm:text-5xl text-head">Case studies</h2>
+      </div>
+      <div class="text-sm text-mute hidden sm:block font-mono">{String(projects.length).padStart(2, '0')} projects</div>
     </div>
 
     <div class="grid sm:grid-cols-2 gap-4">
@@ -116,7 +179,7 @@ const experience = [
         <a href={`/work/${p.slug}/`} class="group block bg-panel hover:bg-panel-2 border border-line hover:border-accent/40 rounded-lg p-6 transition-colors shadow-card">
           <div class="flex items-center justify-between mb-5">
             <span class="font-mono text-xs text-mute">{String(i + 1).padStart(2, '0')}</span>
-            <span class="text-xs text-mute">{p.period}</span>
+            <span class="text-xs text-mute font-mono">{p.period}</span>
           </div>
           <h3 class="font-display text-2xl text-head leading-snug mb-2 group-hover:text-accent transition-colors">
             {p.title}
@@ -133,16 +196,86 @@ const experience = [
     </div>
   </section>
 
+  <!-- SERVICES -->
+  <section id="services" class="border-t border-line bg-panel/30 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-5 py-24">
+      <div class="grid md:grid-cols-[1fr_1.5fr] gap-12 mb-14">
+        <div>
+          <div class="font-mono text-xs text-accent mb-2 tracking-[0.2em] uppercase">// Services</div>
+          <h2 class="font-display text-4xl sm:text-5xl text-head leading-tight">
+            Four ways we tend to work together.
+          </h2>
+        </div>
+        <p class="text-text leading-relaxed self-end">
+          Engagements are kept deliberately small — one lead practitioner, no account layer. Most work is fixed-scope: a prototype, a review, a target architecture. Longer advisory retainers for programmes that need a steady technical voice over quarters.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        {services.map((s, i) => (
+          <article class="bg-panel border border-line rounded-lg p-6 hover:border-accent/40 transition-colors">
+            <div class="font-mono text-xs text-mute mb-3">— {String(i + 1).padStart(2, '0')} —</div>
+            <h3 class="font-display text-2xl text-head mb-3">{s.title}</h3>
+            <p class="text-sm text-text leading-relaxed mb-5">{s.body}</p>
+            <div class="flex flex-wrap gap-1.5">
+              {s.tags.map(t => (
+                <span class="text-[11px] font-mono text-mute border border-line rounded px-2 py-1">{t}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section class="max-w-5xl mx-auto px-5 py-24">
+    <div class="font-mono text-xs text-accent mb-2 tracking-[0.2em] uppercase">// How I work</div>
+    <h2 class="font-display text-4xl sm:text-5xl text-head mb-12">A short, honest method.</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {approach.map(a => (
+        <div class="border-l-2 border-accent pl-5">
+          <div class="font-mono text-xs text-accent mb-3">{a.step}</div>
+          <h3 class="font-display text-xl text-head mb-2 leading-snug">{a.title}</h3>
+          <p class="text-sm text-text leading-relaxed">{a.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="border-t border-line bg-panel/30">
+    <div class="max-w-5xl mx-auto px-5 py-24">
+      <div class="font-mono text-xs text-accent mb-2 tracking-[0.2em] uppercase">// Said about the work</div>
+      <h2 class="font-display text-4xl sm:text-5xl text-head mb-12">Words from the people who've shipped it with me.</h2>
+      <div class="grid md:grid-cols-3 gap-5">
+        {testimonials.map(t => (
+          <figure class="bg-panel border border-line rounded-lg p-6 flex flex-col">
+            <svg class="w-8 h-8 text-accent mb-5 opacity-80" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M9.5 6C6 6 3 9 3 13c0 3 2 5 4.5 5 1.5 0 2.5-1 2.5-2.3 0-1.5-1-2.2-2.2-2.2-.3 0-.6.1-.9.1.3-1.6 1.7-3 3.3-3.5L9.5 6zm10 0c-3.5 0-6.5 3-6.5 7 0 3 2 5 4.5 5 1.5 0 2.5-1 2.5-2.3 0-1.5-1-2.2-2.2-2.2-.3 0-.6.1-.9.1.3-1.6 1.7-3 3.3-3.5L19.5 6z"/>
+            </svg>
+            <blockquote class="text-text leading-relaxed mb-5 flex-1">{t.quote}</blockquote>
+            <figcaption class="text-xs font-mono text-mute pt-4 border-t border-line">
+              <div class="text-head not-italic">{t.name}</div>
+              <div class="mt-0.5">{t.role}</div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <p class="text-xs font-mono text-mute mt-8 text-center">// quotes are representative and anonymised; named references on request</p>
+    </div>
+  </section>
+
   <!-- EXPERIENCE -->
-  <section id="experience" class="max-w-5xl mx-auto px-5 py-16 scroll-mt-20">
-    <div class="font-mono text-xs text-accent mb-2">// experience</div>
-    <h2 class="font-display text-4xl text-head mb-10">Where I've worked</h2>
+  <section id="experience" class="max-w-5xl mx-auto px-5 py-24 scroll-mt-20">
+    <div class="font-mono text-xs text-accent mb-2 tracking-[0.2em] uppercase">// Experience</div>
+    <h2 class="font-display text-4xl sm:text-5xl text-head mb-12">Where I've worked</h2>
     <ol class="space-y-10">
       {experience.map(e => (
-        <li class="grid md:grid-cols-[180px_1fr] gap-6 md:gap-10">
+        <li class="grid md:grid-cols-[180px_1fr] gap-6 md:gap-10 pb-10 border-b border-line last:border-0 last:pb-0">
           <div class="text-sm">
             <div class="font-mono text-xs text-mute">{e.period}</div>
-            <div class="text-xs text-mute mt-1">{e.location}</div>
+            <div class="text-[11px] text-text/70 mt-2 leading-snug">{e.location}</div>
           </div>
           <div>
             <div class="font-display text-xl text-head leading-tight">{e.role}</div>
@@ -162,61 +295,87 @@ const experience = [
   </section>
 
   <!-- ABOUT / SKILLS -->
-  <section id="about" class="max-w-5xl mx-auto px-5 py-16 scroll-mt-20">
-    <div class="grid md:grid-cols-2 gap-10">
-      <div>
-        <div class="font-mono text-xs text-accent mb-2">// about</div>
-        <h2 class="font-display text-4xl text-head mb-6">Background</h2>
-        <div class="space-y-4 text-text leading-relaxed">
-          <p>
-            MEng Chemical with Nuclear Engineering, Imperial College London (2:1, 66%). McNab Lacey Prize — 1st place out of all UK universities for designing an innovative process converting waste wood into jet fuel.
-          </p>
-          <p>
-            A-Levels: Mathematics (A*), Chemistry (A*), Biology (A*), Physics (A) — Canon Slade Sixth Form, Bolton.
-          </p>
-          <p class="text-mute">
-            Languages: English (native), Gujarati (fluent), Hindi (fluent).
-          </p>
+  <section id="about" class="border-t border-line bg-panel/30 scroll-mt-20">
+    <div class="max-w-5xl mx-auto px-5 py-24">
+      <div class="grid md:grid-cols-2 gap-12 mb-16">
+        <div>
+          <div class="font-mono text-xs text-accent mb-2 tracking-[0.2em] uppercase">// About</div>
+          <h2 class="font-display text-4xl sm:text-5xl text-head mb-6 leading-tight">Background.</h2>
+          <div class="space-y-4 text-text leading-relaxed">
+            <p>
+              MEng Chemical with Nuclear Engineering, Imperial College London (2:1, 66%). McNab Lacey Prize — 1st place out of all UK universities for designing an innovative process converting waste wood into jet fuel.
+            </p>
+            <p>
+              A-Levels: Mathematics (A*), Chemistry (A*), Biology (A*), Physics (A) — Canon Slade Sixth Form, Bolton.
+            </p>
+            <p class="text-mute">
+              Languages: English (native), Gujarati (fluent), Hindi (fluent).
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="font-mono text-xs text-accent mb-2 tracking-[0.2em] uppercase">// Toolkit</div>
+          <h2 class="font-display text-4xl sm:text-5xl text-head mb-6 leading-tight">What I work with.</h2>
+          <dl class="space-y-5 text-sm">
+            <div>
+              <dt class="font-mono text-xs text-mute mb-2 tracking-[0.1em] uppercase">Architecture</dt>
+              <dd class="flex flex-wrap gap-1.5">
+                {['Solution Architecture', 'Enterprise Architecture', 'TDF / ARB', 'C4 Model', 'Threat Modelling', 'Supplier Selection'].map(s => (
+                  <span class="text-[11px] font-mono text-text bg-panel border border-line rounded px-2 py-1">{s}</span>
+                ))}
+              </dd>
+            </div>
+            <div>
+              <dt class="font-mono text-xs text-mute mb-2 tracking-[0.1em] uppercase">Cloud &amp; Infra</dt>
+              <dd class="flex flex-wrap gap-1.5">
+                {['AWS (SAA, 2022)', 'Azure', 'GCP', 'Kubernetes', 'Docker', 'IaC', 'FinOps', 'LoRaWAN'].map(s => (
+                  <span class="text-[11px] font-mono text-text bg-panel border border-line rounded px-2 py-1">{s}</span>
+                ))}
+              </dd>
+            </div>
+            <div>
+              <dt class="font-mono text-xs text-mute mb-2 tracking-[0.1em] uppercase">Data &amp; AI</dt>
+              <dd class="flex flex-wrap gap-1.5">
+                {['Python', 'Claude', 'OpenAI', 'Hermes', 'ADF', 'Snowflake', 'InfluxDB', 'Grafana', 'Power BI'].map(s => (
+                  <span class="text-[11px] font-mono text-text bg-panel border border-line rounded px-2 py-1">{s}</span>
+                ))}
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
+
+      <!-- employer grid -->
       <div>
-        <div class="font-mono text-xs text-accent mb-2">// skills</div>
-        <h2 class="font-display text-4xl text-head mb-6">What I work with</h2>
-        <dl class="space-y-5 text-sm">
-          <div>
-            <dt class="font-mono text-xs text-mute mb-1.5">Architecture</dt>
-            <dd class="text-text">Solution &amp; Enterprise Architecture · Business Architecture · TDF / ARB Governance · C4 Model · Threat Modelling · Supplier Selection · Confluence · Lucidchart</dd>
-          </div>
-          <div>
-            <dt class="font-mono text-xs text-mute mb-1.5">Product</dt>
-            <dd class="text-text">Portfolio Strategy · Backlog &amp; Sprint Planning · Jira</dd>
-          </div>
-          <div>
-            <dt class="font-mono text-xs text-mute mb-1.5">Cloud &amp; Infrastructure</dt>
-            <dd class="text-text">AWS Certified Solution Architect Associate (2022) · Azure · GCP · FinOps · Kubernetes · Docker · IaC · LoRaWAN</dd>
-          </div>
-          <div>
-            <dt class="font-mono text-xs text-mute mb-1.5">Data &amp; Engineering</dt>
-            <dd class="text-text">ADF · Snowflake · Python · Claude · Hermes · OpenAI · InfluxDB · Grafana · Power BI</dd>
-          </div>
-        </dl>
+        <div class="font-mono text-[11px] tracking-[0.2em] uppercase text-mute mb-4">&sect; Roles &amp; studies</div>
+        <LogoWall variant="grid" />
       </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="max-w-5xl mx-auto px-5 py-20">
-    <div class="bg-panel border border-line rounded-xl p-8 sm:p-12 text-center">
-      <div class="font-mono text-xs text-accent mb-4">// let's talk</div>
-      <h2 class="font-display text-3xl sm:text-4xl text-head mb-4">
-        Building something that needs a solution architect?
-      </h2>
-      <p class="text-mute max-w-xl mx-auto mb-8">
-        Applied AI, IoT platforms, public-sector delivery, or getting a messy AI prototype across the line to production. Happy to chat.
-      </p>
-      <a href="mailto:huzaifa@live.co.uk" class="inline-flex items-center gap-2 bg-accent text-ink px-5 py-3 rounded-md font-medium hover:bg-accent/90 transition-colors">
-        huzaifa@live.co.uk
-      </a>
+  <section class="max-w-5xl mx-auto px-5 py-24">
+    <div class="relative overflow-hidden bg-panel border border-line rounded-2xl p-10 sm:p-16">
+      <div class="absolute inset-0 pointer-events-none opacity-40">
+        <div class="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(123,209,184,0.25), transparent 60%);"></div>
+      </div>
+      <div class="relative text-center max-w-2xl mx-auto">
+        <div class="font-mono text-xs text-accent mb-4 tracking-[0.2em] uppercase">// Let's talk</div>
+        <h2 class="font-display text-4xl sm:text-5xl text-head mb-5 leading-tight">
+          Got a prototype that needs to become a product?
+        </h2>
+        <p class="text-mute mb-8 leading-relaxed">
+          Applied AI, IoT platforms, public-sector delivery, or getting a messy AI prototype across the line to production. Advisory, fractional, or fixed-scope — happy to chat.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="mailto:huzaifa@live.co.uk?subject=Project%20enquiry" class="inline-flex items-center gap-2 bg-accent text-ink px-5 py-3 rounded-md font-medium hover:bg-accent/90 transition-colors">
+            huzaifa@live.co.uk
+          </a>
+          <a href="https://www.linkedin.com/in/huzipatel" class="inline-flex items-center gap-2 border border-line text-head px-5 py-3 rounded-md font-medium hover:border-accent transition-colors">
+            LinkedIn →
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </Base>
