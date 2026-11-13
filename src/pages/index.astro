@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import LogoWall from '../components/LogoWall.astro';
+import Avatar from '../components/Avatar.astro';
 import { projects } from '../data/projects.ts';
 import { testimonials } from '../data/employers.ts';
 
@@ -113,6 +114,8 @@ const approach = [
       <div class="absolute top-20 right-0 w-[520px] h-[520px] rounded-full blur-3xl" style="background: radial-gradient(circle, rgba(163,139,252,0.22), transparent 60%);"></div>
     </div>
     <div class="relative max-w-5xl mx-auto px-5 pt-24 pb-20">
+      <div class="grid md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-start">
+        <div>
       <div class="font-mono text-xs text-accent mb-6 tracking-[0.2em] uppercase">
         <span class="opacity-60">//</span> Solution Architecture &middot; Applied AI &middot; IoT
       </div>
@@ -130,6 +133,16 @@ const approach = [
         <a href="#services" class="inline-flex items-center gap-2 bg-panel border border-line text-head px-5 py-3 rounded-md font-medium hover:border-accent hover:bg-panel-2 transition-colors">
           How I can help
         </a>
+      </div>
+        </div>
+        <div class="hidden md:block w-[260px] shrink-0 pt-2">
+          <div class="relative rounded-xl border border-line bg-panel/60 p-3 shadow-card">
+            <Avatar />
+            <div class="mt-3 font-mono text-[10px] tracking-[0.2em] uppercase text-mute text-center">
+              <span class="text-accent">&bull;</span> Live
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- stats strip -->

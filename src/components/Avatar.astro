@@ -1,0 +1,246 @@
+---
+// Animated SVG self-portrait. Stylised; captures signature features
+// (dark wavy hair, handlebar mustache, soul patch, olive skin, green
+// quarter-zip sweater). CSS-only animation: blink, subtle breath, mustache
+// twitch. No JS, no external assets; ships as a single component.
+---
+<figure class="avatar" aria-label="Huzi Patel">
+  <svg viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg" role="img"
+       aria-labelledby="avatar-title avatar-desc">
+    <title id="avatar-title">Huzi Patel</title>
+    <desc id="avatar-desc">Illustrated portrait</desc>
+
+    <defs>
+      <!-- Skin gradient: warm olive -->
+      <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"  stop-color="#dcae87"/>
+        <stop offset="60%" stop-color="#c88f65"/>
+        <stop offset="100%" stop-color="#9f6c48"/>
+      </linearGradient>
+
+      <!-- Hair gradient -->
+      <linearGradient id="hair" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"  stop-color="#201611"/>
+        <stop offset="100%" stop-color="#0a0706"/>
+      </linearGradient>
+
+      <!-- Sweater gradient: sage / forest green -->
+      <linearGradient id="sweater" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%"  stop-color="#5f8a6b"/>
+        <stop offset="100%" stop-color="#2f4b39"/>
+      </linearGradient>
+
+      <!-- Background halo -->
+      <radialGradient id="halo" cx="50%" cy="38%" r="55%">
+        <stop offset="0%" stop-color="rgba(123,209,184,0.22)"/>
+        <stop offset="70%" stop-color="rgba(163,139,252,0.08)"/>
+        <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+      </radialGradient>
+
+      <!-- Hair ribbed texture -->
+      <pattern id="hairStroke" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(18)">
+        <rect width="6" height="6" fill="url(#hair)"/>
+        <path d="M0 3 L6 3" stroke="#000" stroke-opacity="0.35" stroke-width="0.6"/>
+      </pattern>
+
+      <!-- Sweater ribbed texture -->
+      <pattern id="ribs" patternUnits="userSpaceOnUse" width="7" height="7">
+        <rect width="7" height="7" fill="url(#sweater)"/>
+        <path d="M0 0 L0 7" stroke="#1b2e23" stroke-width="1.2" stroke-opacity="0.55"/>
+      </pattern>
+    </defs>
+
+    <!-- Background halo -->
+    <rect width="220" height="260" fill="url(#halo)"/>
+
+    <!-- Subtle grid dots behind, same vocabulary as hero -->
+    <g opacity="0.15">
+      <circle cx="30"  cy="40"  r="1" fill="#7bd1b8"/>
+      <circle cx="190" cy="50"  r="1" fill="#7bd1b8"/>
+      <circle cx="40"  cy="220" r="1" fill="#a38bfc"/>
+      <circle cx="195" cy="210" r="1" fill="#a38bfc"/>
+    </g>
+
+    <!-- Breathing group: everything from shoulders up drifts fractionally -->
+    <g class="breath">
+
+      <!-- Sweater / shoulders -->
+      <g>
+        <!-- Shoulder block -->
+        <path d="M14,260 C 25,200 60,185 110,185 C 160,185 195,200 206,260 Z"
+              fill="url(#ribs)"/>
+        <!-- Tall collar -->
+        <path d="M82,200 C 90,175 130,175 138,200 L 138,215 C 130,205 90,205 82,215 Z"
+              fill="url(#sweater)" stroke="#1b2e23" stroke-width="0.8"/>
+        <!-- Zipper -->
+        <line x1="110" y1="178" x2="110" y2="215"
+              stroke="#c9c9c9" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="110" cy="178" r="2.4" fill="#e8e8e8" stroke="#6a6a6a" stroke-width="0.6"/>
+        <!-- Undershirt v -->
+        <path d="M96,205 L 110,218 L 124,205 L 124,215 L 110,228 L 96,215 Z"
+              fill="#0b0b0c"/>
+      </g>
+
+      <!-- Neck -->
+      <path d="M92,172 L 92,196 Q 110,204 128,196 L 128,172 Z" fill="url(#skin)"/>
+      <!-- Neck shadow -->
+      <path d="M92,186 Q 110,198 128,186 L 128,196 Q 110,204 92,196 Z"
+            fill="#000" opacity="0.18"/>
+
+      <!-- Head -->
+      <g>
+        <!-- Face shape -->
+        <path d="M60,108
+                 C 60,70 85,52 110,52
+                 C 135,52 160,70 160,108
+                 C 160,145 142,178 110,180
+                 C 78,178 60,145 60,108 Z"
+              fill="url(#skin)"/>
+
+        <!-- Jaw shadow -->
+        <path d="M72,135 C 85,172 135,172 148,135 C 148,160 132,180 110,180 C 88,180 72,160 72,135 Z"
+              fill="#8a5a3a" opacity="0.22"/>
+
+        <!-- Hair: thick wavy mop that flares at sides -->
+        <path d="M44,120
+                 C 40,70 72,30 110,30
+                 C 148,30 182,66 178,122
+                 C 174,100 165,82 150,74
+                 C 160,90 160,100 154,112
+                 C 150,92 136,74 120,70
+                 C 128,82 128,96 122,108
+                 C 118,90 106,70 94,68
+                 C 100,80 98,96 90,108
+                 C 86,88 74,76 64,80
+                 C 72,94 70,108 60,120
+                 C 54,108 48,112 44,120 Z"
+              fill="url(#hairStroke)"/>
+
+        <!-- Side hair flares -->
+        <path d="M52,118 C 46,138 50,152 60,160 C 54,144 54,130 58,120 Z" fill="url(#hair)"/>
+        <path d="M168,118 C 174,138 170,152 160,160 C 166,144 166,130 162,120 Z" fill="url(#hair)"/>
+
+        <!-- Eyebrows -->
+        <path d="M78,108 Q 90,100 102,108" stroke="#140c08" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M118,108 Q 130,100 142,108" stroke="#140c08" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+        <!-- Eyes (blink animates scaleY of these groups) -->
+        <g class="eye eye-l">
+          <ellipse cx="90" cy="120" rx="6.5" ry="3.8" fill="#fff"/>
+          <circle cx="90" cy="120" r="3.1" fill="#3a241a"/>
+          <circle cx="91.2" cy="118.8" r="0.9" fill="#fff"/>
+        </g>
+        <g class="eye eye-r">
+          <ellipse cx="130" cy="120" rx="6.5" ry="3.8" fill="#fff"/>
+          <circle cx="130" cy="120" r="3.1" fill="#3a241a"/>
+          <circle cx="131.2" cy="118.8" r="0.9" fill="#fff"/>
+        </g>
+
+        <!-- Eyelids (closed state, animate opacity in sync with blink) -->
+        <path class="lid lid-l" d="M83,120 Q 90,123 97,120" stroke="#6b4a33" stroke-width="2" fill="none" stroke-linecap="round" opacity="0"/>
+        <path class="lid lid-r" d="M123,120 Q 130,123 137,120" stroke="#6b4a33" stroke-width="2" fill="none" stroke-linecap="round" opacity="0"/>
+
+        <!-- Nose -->
+        <path d="M110,124 Q 106,138 108,146 Q 110,150 114,146 Q 116,138 112,124 Z"
+              fill="#a46e4a" opacity="0.55"/>
+        <path d="M106,148 Q 110,151 114,148" stroke="#6b4a33" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+
+        <!-- Handlebar mustache -->
+        <g class="stache">
+          <path d="M80,160
+                   C 90,156 100,158 110,160
+                   C 120,158 130,156 140,160
+                   C 134,168 126,166 122,163
+                   C 128,170 134,172 140,170
+                   C 144,170 148,166 150,160
+                   C 148,166 144,174 136,176
+                   C 128,178 120,172 116,166
+                   C 114,168 112,169 110,169
+                   C 108,169 106,168 104,166
+                   C 100,172 92,178 84,176
+                   C 76,174 72,166 70,160
+                   C 72,166 76,170 80,170
+                   C 86,172 92,170 98,163
+                   C 94,166 86,168 80,160 Z"
+                fill="#1b110b"/>
+        </g>
+
+        <!-- Lower lip -->
+        <path d="M100,176 Q 110,180 120,176 Q 118,181 110,182 Q 102,181 100,176 Z"
+              fill="#7a4a36"/>
+
+        <!-- Soul patch -->
+        <path d="M106,183 Q 110,188 114,183 L 113,190 Q 110,192 107,190 Z" fill="#1b110b"/>
+        <!-- Short beard along jawline -->
+        <path d="M70,148 Q 78,172 100,184 Q 110,186 120,184 Q 142,172 150,148
+                 Q 142,178 118,190 Q 110,192 102,190 Q 78,178 70,148 Z"
+              fill="#1b110b" opacity="0.35"/>
+      </g>
+    </g>
+
+    <!-- Foreground scanline / tech overlay (very subtle) -->
+    <g opacity="0.06">
+      <line x1="0" y1="70"  x2="220" y2="70"  stroke="#7bd1b8"/>
+      <line x1="0" y1="140" x2="220" y2="140" stroke="#7bd1b8"/>
+      <line x1="0" y1="210" x2="220" y2="210" stroke="#7bd1b8"/>
+    </g>
+  </svg>
+</figure>
+
+<style>
+  .avatar {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 0;
+    aspect-ratio: 220 / 260;
+  }
+  .avatar svg { width: 100%; height: 100%; display: block; }
+
+  /* Subtle breathing: 4s cycle, sub-pixel scale on the whole head+shoulders */
+  .breath {
+    transform-origin: 110px 230px;
+    animation: breath 4.2s ease-in-out infinite;
+  }
+  @keyframes breath {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50%      { transform: translateY(-1.4px) scale(1.012); }
+  }
+
+  /* Blink: eyes squash, lids fade in for ~120ms every ~5s, with a double-blink
+     once a cycle for personality */
+  .eye {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: blink 5.3s ease-in-out infinite;
+  }
+  .lid { animation: lidShow 5.3s ease-in-out infinite; }
+  @keyframes blink {
+    0%, 92%, 100% { transform: scaleY(1); }
+    94%, 96%      { transform: scaleY(0.05); }
+    95%           { transform: scaleY(0.05); }
+  }
+  @keyframes lidShow {
+    0%, 92%, 100% { opacity: 0; }
+    94%, 96%      { opacity: 1; }
+  }
+
+  /* Mustache: tiny twitch every ~7s for personality */
+  .stache {
+    transform-origin: 110px 162px;
+    transform-box: fill-box;
+    animation: stacheTwitch 7s ease-in-out infinite;
+  }
+  @keyframes stacheTwitch {
+    0%, 40%, 100% { transform: translate(0,0) rotate(0); }
+    42%           { transform: translate(0.4px,-0.4px) rotate(-0.6deg); }
+    44%           { transform: translate(-0.4px,0) rotate(0.6deg); }
+    46%           { transform: translate(0,0) rotate(0); }
+  }
+
+  /* Reduced-motion: freeze everything */
+  @media (prefers-reduced-motion: reduce) {
+    .breath, .eye, .lid, .stache { animation: none !important; }
+    .lid { opacity: 0 !important; }
+  }
+</style>
