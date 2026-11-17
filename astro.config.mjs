@@ -3,8 +3,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'https://huzipatel.github.io',
-  integrations: [sitemap()],
+  site: 'https://huzipatel.london',
+  integrations: [sitemap({ filter: (page) => !page.includes('/apply/') })],
   vite: { plugins: [tailwindcss()] },
   compressHTML: true,
   build: { inlineStylesheets: 'auto' },

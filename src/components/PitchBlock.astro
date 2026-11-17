@@ -1,0 +1,93 @@
+---
+// Renders a single Block. Keep this component dumb and the Pitch type
+// authoritative; variant rendering decisions belong here.
+import type { Block } from '../data/pitchTypes';
+const { block } = Astro.props as { block: Block };
+---
+{block.type === 'heading' && (
+  <>
+    {(block.level ?? 2) === 2 ? (
+      <h2 class={`font-display text-3xl sm:text-4xl text-head mt-16 mb-5 ${block.mono ? 'font-mono text-xl' : ''}`}>{block.text}</h2>
+    ) : (
+      <h3 class={`font-display text-xl text-head mt-10 mb-3 ${block.mono ? 'font-mono text-base' : ''}`}>{block.text}</h3>
+    )}
+  </>
+)}
+
+{block.type === 'paragraph' && (
+  <p class="text-text leading-relaxed mb-5">{block.text}</p>
+)}
+
+{block.type === 'lede' && (
+  <p class="text-xl text-mute leading-relaxed mb-8">{block.text}</p>
+)}
+
+{block.type === 'bullets' && (
+  <ul class="list-disc pl-6 space-y-2 mb-6 text-text marker:text-accent/60">
+    {block.items.map((i) => <li class="leading-relaxed">{i}</li>)}
+  </ul>
+)}
+
+{block.type === 'numbered' && (
+  <ol class="list-decimal pl-6 space-y-2 mb-6 text-text marker:text-accent/60 marker:font-mono">
+    {block.items.map((i) => <li class="leading-relaxed">{i}</li>)}
+  </ol>
+)}
+
+{block.type === 'callout' && (
+  <aside class={`rounded-lg border p-5 mb-6 ${
+    block.tone === 'warn' ? 'border-yellow-500/30 bg-yellow-500/5'
+    : block.tone === 'mute' ? 'border-line bg-panel/60'
+    : 'border-accent/30 bg-accent/5'
+  }`}>
+    {block.title && <div class="font-mono text-xs text-accent mb-2 tracking-[0.15em] uppercase">{block.title}</div>}
+    <div class="text-text leading-relaxed">{block.body}</div>
+  </aside>
+)}
+
+{block.type === 'code' && (
+  <figure class="mb-6">
+    <pre class="bg-panel/80 border border-line rounded-lg p-4 overflow-x-auto text-sm"><code class="font-mono text-text">{block.code}</code></pre>
+    {block.caption && <figcaption class="text-xs text-mute mt-2 font-mono">{block.caption}</figcaption>}
+  </figure>
+)}
+
+{block.type === 'image' && (
+  <figure class="mb-6">
+    <img src={block.src} alt={block.alt} class="rounded-lg border border-line w-full" />
+    {block.caption && <figcaption class="text-xs text-mute mt-2 font-mono">{block.caption}</figcaption>}
+  </figure>
+)}
+
+{block.type === 'embed' && (
+  <div class="mb-6 rounded-lg border border-line overflow-hidden" style={`height:${block.height ?? 480}px`}>
+    <iframe src={block.src} title={block.title ?? 'Embedded demo'} class="w-full h-full" loading="lazy" allow="clipboard-write"></iframe>
+  </div>
+)}
+
+{block.type === 'metricRow' && (
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 border-y border-line py-6 my-8">
+    {block.metrics.map((m) => (
+      <div>
+        <div class="font-display text-2xl text-head">{m.value}</div>
+        <div class="text-[11px] text-text/70 mt-1 leading-snug">{m.label}</div>
+      </div>
+    ))}
+  </div>
+)}
+
+{block.type === 'links' && (
+  <ul class="space-y-2 mb-6">
+    {block.items.map((l) => (
+      <li>
+        <a href={l.href} class="inline-flex items-center gap-2 font-mono text-sm text-accent hover:underline" target="_blank" rel="noopener">
+          <span>→</span> {l.label}
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
+
+{block.type === 'hr' && (
+  <div class="dotline h-px my-10"></div>
+)}

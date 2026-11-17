@@ -1,0 +1,2 @@
+Pitches live here as <slug>.ts files. See pitchTypes.ts for the shape.
+Create one with: node scripts/new-pitch.mjs "Company" "Role" [--password "code"]

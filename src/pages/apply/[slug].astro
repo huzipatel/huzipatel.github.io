@@ -1,0 +1,157 @@
+---
+import Base from '../../layouts/Base.astro';
+import PitchBlock from '../../components/PitchBlock.astro';
+import { pitches } from '../../data/pitches';
+
+export function getStaticPaths() {
+  return pitches.map((p) => ({ params: { slug: p.slug }, props: { pitch: p } }));
+}
+
+const { pitch } = Astro.props;
+const title = `${pitch.role} · ${pitch.company} — Huzi Patel`;
+const description = pitch.thesis.slice(0, 180);
+const defaultEmail = 'huzaifa@live.co.uk';
+const email = pitch.cta?.email ?? defaultEmail;
+---
+<Base title={title} description={description} noindex={true}>
+  {pitch.passwordSha256 && (
+    <div id="pitch-gate" class="fixed inset-0 z-50 bg-ink/95 backdrop-blur flex items-center justify-center px-5">
+      <form id="pitch-gate-form" class="max-w-sm w-full bg-panel border border-line rounded-xl p-6 shadow-card">
+        <div class="font-mono text-xs text-accent mb-3 tracking-[0.2em] uppercase">// Private</div>
+        <h1 class="font-display text-2xl text-head mb-2">{pitch.company}</h1>
+        <p class="text-sm text-mute mb-5">This pitch is shared privately. Enter the access code to continue.</p>
+        <input id="pitch-pw" type="password" autocomplete="off" required
+          class="w-full bg-ink border border-line rounded-md px-3 py-2 text-text focus:outline-none focus:border-accent"
+          placeholder="Access code" />
+        <button type="submit" class="mt-4 w-full bg-accent text-ink font-medium rounded-md px-4 py-2 hover:bg-accent/90 transition-colors">
+          Open
+        </button>
+        <p id="pitch-err" class="text-xs text-red-400 mt-3 hidden">Wrong code. Try again.</p>
+      </form>
+    </div>
+  )}
+
+  <article id="pitch-body" class={`max-w-3xl mx-auto px-5 pt-16 pb-24 ${pitch.passwordSha256 ? 'invisible' : ''}`}>
+    <a href="/" class="inline-flex items-center gap-2 font-mono text-xs text-mute hover:text-accent transition-colors mb-10">
+      <span>←</span> huzipatel.london
+    </a>
+
+    <div class="font-mono text-xs text-accent mb-4 tracking-[0.15em] uppercase">
+      // For {pitch.company}{pitch.location ? ` · ${pitch.location}` : ''}
+    </div>
+    <h1 class="font-display text-4xl sm:text-5xl text-head leading-tight mb-3">{pitch.role}</h1>
+    {pitch.roleLink && (
+      <a href={pitch.roleLink} target="_blank" rel="noopener" class="font-mono text-sm text-mute hover:text-accent mb-6 inline-block">
+        Original job description ↗
+      </a>
+    )}
+
+    <p class="text-xl text-mute leading-relaxed mt-6 mb-8">{pitch.thesis}</p>
+
+    {pitch.headlineMetrics && pitch.headlineMetrics.length > 0 && (
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 border-y border-line py-6 mb-10">
+        {pitch.headlineMetrics.map((m) => (
+          <div>
+            <div class="font-display text-2xl text-head">{m.value}</div>
+            <div class="text-[11px] text-text/70 mt-1 leading-snug">{m.label}</div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {pitch.miniProject && (
+      <section class="rounded-xl border border-accent/30 bg-accent/5 p-6 sm:p-8 mb-12 shadow-card">
+        <div class="font-mono text-xs text-accent mb-3 tracking-[0.2em] uppercase">// Mini-project built for this role</div>
+        <h2 class="font-display text-2xl sm:text-3xl text-head mb-4">{pitch.miniProject.title}</h2>
+        <div class="space-y-3 mb-5">
+          <p class="text-text leading-relaxed"><span class="font-mono text-xs text-accent mr-2">PROBLEM</span>{pitch.miniProject.problem}</p>
+          <p class="text-text leading-relaxed"><span class="font-mono text-xs text-accent mr-2">APPROACH</span>{pitch.miniProject.approach}</p>
+        </div>
+        {pitch.miniProject.stack && (
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            {pitch.miniProject.stack.map((t) => (
+              <span class="text-[11px] font-mono text-mute border border-line rounded px-2 py-1">{t}</span>
+            ))}
+          </div>
+        )}
+        <div class="flex flex-wrap gap-3">
+          {pitch.miniProject.liveDemoUrl && (
+            <a href={pitch.miniProject.liveDemoUrl} target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-accent text-ink px-4 py-2 rounded-md font-medium hover:bg-accent/90 transition-colors text-sm">
+              Open live demo ↗
+            </a>
+          )}
+          {pitch.miniProject.repoUrl && (
+            <a href={pitch.miniProject.repoUrl} target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-panel border border-line text-head px-4 py-2 rounded-md font-medium hover:border-accent transition-colors text-sm">
+              View source ↗
+            </a>
+          )}
+          {pitch.miniProject.artefacts?.map((a) => (
+            <a href={a.href} target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-panel border border-line text-head px-4 py-2 rounded-md text-sm hover:border-accent transition-colors">
+              {a.label} ↗
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {pitch.sections.map((b) => <PitchBlock block={b} />)}
+
+    <div class="dotline h-px my-16"></div>
+
+    <section>
+      <div class="font-mono text-xs text-accent mb-3 tracking-[0.2em] uppercase">// Next step</div>
+      <h2 class="font-display text-3xl text-head mb-4">{pitch.cta?.heading ?? "Let's talk"}</h2>
+      <p class="text-text leading-relaxed mb-6">
+        {pitch.cta?.body ?? `Happy to walk through the mini-project live, go deeper on the approach, or dig into whatever would be most useful for a next conversation.`}
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href={`mailto:${email}?subject=${encodeURIComponent(`Re: ${pitch.role} — ${pitch.company}`)}`}
+           class="inline-flex items-center gap-2 bg-accent text-ink px-5 py-3 rounded-md font-medium hover:bg-accent/90 transition-colors">
+          Email me
+        </a>
+        {pitch.cta?.calendarUrl && (
+          <a href={pitch.cta.calendarUrl} target="_blank" rel="noopener"
+             class="inline-flex items-center gap-2 bg-panel border border-line text-head px-5 py-3 rounded-md font-medium hover:border-accent transition-colors">
+            Book a time
+          </a>
+        )}
+      </div>
+    </section>
+
+    <footer class="mt-16 pt-8 border-t border-line text-xs text-mute font-mono">
+      Written {new Date(pitch.createdAt).toISOString().slice(0, 10)}
+      {pitch.expiresAt && <> · expires {new Date(pitch.expiresAt).toISOString().slice(0, 10)}</>}
+      · unlisted
+    </footer>
+  </article>
+
+  {pitch.passwordSha256 && (
+    <script define:vars={{ expected: pitch.passwordSha256, slug: pitch.slug }}>
+      (async function () {
+        const KEY = 'pitch_ok_' + slug;
+        async function sha256(s) {
+          const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+          return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+        const unlock = () => {
+          document.getElementById('pitch-gate').remove();
+          document.getElementById('pitch-body').classList.remove('invisible');
+        };
+        if (sessionStorage.getItem(KEY) === '1') { unlock(); return; }
+        const form = document.getElementById('pitch-gate-form');
+        const pw = document.getElementById('pitch-pw');
+        const err = document.getElementById('pitch-err');
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const h = await sha256(pw.value.trim());
+          if (h === expected) { sessionStorage.setItem(KEY, '1'); unlock(); }
+          else { err.classList.remove('hidden'); pw.value = ''; pw.focus(); }
+        });
+        pw.focus();
+      })();
+    </script>
+  )}
+</Base>
