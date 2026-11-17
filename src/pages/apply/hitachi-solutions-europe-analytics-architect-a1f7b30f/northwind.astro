@@ -1,0 +1,627 @@
+---
+// Standalone Hitachi-branded client deliverable. Intentionally does NOT
+// use the site's Base layout — this is meant to feel like a real Hitachi
+// Solutions client artefact, not a portfolio page. Noindex + accessible
+// only via the pitch link.
+const SLUG = 'hitachi-solutions-europe-analytics-architect-a1f7b30f';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>Northwind Retail Group — Analytics Modernisation Proposal | Hitachi Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&family=Noto+Serif:wght@400;700&display=swap" />
+    <style>
+      :root {
+        --hr-red: #e60027;
+        --hr-red-dark: #b50020;
+        --hr-ink: #15161a;
+        --hr-mute: #5a5e67;
+        --hr-line: #e2e4ea;
+        --hr-panel: #f6f7fa;
+        --hr-panel-2: #eef0f4;
+        --hr-accent-tint: rgba(230,0,39,0.06);
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Noto Sans', system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+        background: #fff;
+        color: var(--hr-ink);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.55;
+      }
+      a { color: var(--hr-red); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      .wrap { max-width: 1040px; margin: 0 auto; padding: 0 28px; }
+
+      /* Top bar — Hitachi mast */
+      .mast {
+        background: var(--hr-ink);
+        color: #fff;
+        padding: 14px 0;
+        border-bottom: 3px solid var(--hr-red);
+      }
+      .mast-inner { display: flex; align-items: center; justify-content: space-between; }
+      .brand {
+        display: flex; align-items: center; gap: 12px;
+        font-weight: 700; letter-spacing: 0.02em;
+      }
+      .brand-mark {
+        display: inline-block; width: 10px; height: 24px;
+        background: var(--hr-red);
+      }
+      .brand-text { font-size: 15px; }
+      .brand-text em {
+        font-style: normal; color: #b2b5bb; margin-left: 10px;
+        font-weight: 400;
+      }
+      .mast-meta { font-size: 12px; color: #b2b5bb; letter-spacing: 0.04em; }
+
+      /* Document header strip */
+      .doc-tag {
+        padding: 10px 0;
+        background: var(--hr-panel);
+        border-bottom: 1px solid var(--hr-line);
+        font-size: 12px; color: var(--hr-mute); letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      /* Cover */
+      .cover { padding: 72px 0 56px; border-bottom: 1px solid var(--hr-line); }
+      .cover h1 {
+        font-family: 'Noto Serif', Georgia, serif;
+        font-weight: 400; font-size: 56px; line-height: 1.05;
+        margin: 0 0 24px; letter-spacing: -0.01em;
+      }
+      .cover h1 .rule {
+        display: block; width: 72px; height: 4px; background: var(--hr-red);
+        margin: 24px 0;
+      }
+      .cover .lede {
+        font-size: 20px; color: var(--hr-mute); max-width: 720px; line-height: 1.5;
+      }
+      .cover-meta {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+        margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--hr-line);
+      }
+      .cover-meta .label {
+        font-size: 11px; color: var(--hr-mute); text-transform: uppercase;
+        letter-spacing: 0.08em; margin-bottom: 6px;
+      }
+      .cover-meta .val { font-weight: 600; font-size: 14px; }
+
+      /* Section */
+      section { padding: 56px 0; border-bottom: 1px solid var(--hr-line); }
+      section h2 {
+        font-family: 'Noto Serif', Georgia, serif;
+        font-weight: 400; font-size: 34px; margin: 0 0 8px;
+      }
+      section h2 .num {
+        font-family: 'Noto Sans', sans-serif; font-weight: 700;
+        font-size: 14px; color: var(--hr-red); display: block;
+        letter-spacing: 0.12em; margin-bottom: 8px;
+      }
+      section h3 { font-size: 18px; margin: 28px 0 8px; font-weight: 600; }
+      section p { margin: 0 0 14px; color: #2b2d33; max-width: 780px; }
+      section ul { margin: 0 0 16px; padding-left: 22px; }
+      section li { margin-bottom: 8px; }
+
+      /* Two-col grid */
+      .two {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+        margin: 24px 0;
+      }
+      .card {
+        background: var(--hr-panel); border: 1px solid var(--hr-line);
+        border-radius: 6px; padding: 24px;
+      }
+      .card .tag {
+        display: inline-block; font-size: 11px; font-weight: 700;
+        letter-spacing: 0.08em; text-transform: uppercase;
+        color: var(--hr-red); margin-bottom: 10px;
+      }
+      .card h4 { margin: 0 0 10px; font-size: 16px; }
+      .card ul { margin: 0; padding-left: 18px; font-size: 14px; color: #2b2d33; }
+
+      /* KPI / gain strip */
+      .kpis {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+        margin: 28px 0;
+      }
+      .kpi {
+        padding: 24px; background: var(--hr-accent-tint); border-left: 4px solid var(--hr-red);
+      }
+      .kpi .big { font-family: 'Noto Serif', Georgia, serif; font-size: 36px; color: var(--hr-ink); }
+      .kpi .label { font-size: 12px; color: var(--hr-mute); margin-top: 4px; }
+
+      /* Roadmap */
+      .roadmap {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+        border: 1px solid var(--hr-line); border-radius: 6px; overflow: hidden;
+        margin: 24px 0;
+      }
+      .phase { padding: 20px; background: #fff; border-right: 1px solid var(--hr-line); }
+      .phase:last-child { border-right: 0; }
+      .phase .ph-num {
+        display: inline-block; font-size: 11px; font-weight: 700;
+        padding: 3px 8px; background: var(--hr-red); color: #fff;
+        border-radius: 3px; letter-spacing: 0.06em;
+      }
+      .phase h4 { margin: 10px 0 6px; font-size: 14px; }
+      .phase .dur { font-size: 12px; color: var(--hr-mute); margin-bottom: 10px; }
+      .phase ul { font-size: 13px; color: #2b2d33; padding-left: 18px; margin: 0; }
+      .phase li { margin-bottom: 5px; }
+
+      /* Commercial table */
+      table.commercials {
+        width: 100%; border-collapse: collapse; margin: 20px 0;
+        font-size: 14px;
+      }
+      table.commercials th, table.commercials td {
+        padding: 12px 14px; text-align: left;
+        border-bottom: 1px solid var(--hr-line);
+      }
+      table.commercials th {
+        background: var(--hr-panel); font-weight: 600; font-size: 12px;
+        text-transform: uppercase; letter-spacing: 0.06em; color: var(--hr-mute);
+      }
+      table.commercials tr.total td {
+        font-weight: 700; background: var(--hr-accent-tint);
+        border-top: 2px solid var(--hr-red); border-bottom: 0;
+      }
+      .indicative { font-size: 12px; color: var(--hr-mute); font-style: italic; }
+
+      /* Architecture SVG */
+      .arch-wrap { background: var(--hr-panel); padding: 28px; border-radius: 6px; margin: 20px 0; }
+      .arch-wrap svg { width: 100%; height: auto; }
+      .arch-caption { font-size: 12px; color: var(--hr-mute); margin-top: 10px; text-align: center; }
+
+      /* Footer */
+      footer {
+        background: var(--hr-ink); color: #b2b5bb;
+        padding: 36px 0; font-size: 12px;
+      }
+      footer .wrap { display: flex; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+      footer strong { color: #fff; }
+      .back-link {
+        display: inline-block; padding: 8px 14px; margin-top: 12px;
+        border: 1px solid #3a3d44; border-radius: 4px; color: #fff; font-size: 12px;
+      }
+      .back-link:hover { background: var(--hr-red); border-color: var(--hr-red); text-decoration: none; }
+
+      /* Watermark */
+      .watermark {
+        position: fixed; top: 46%; left: 50%; transform: translate(-50%,-50%) rotate(-28deg);
+        font-size: 120px; font-weight: 800; color: rgba(230,0,39,0.05);
+        pointer-events: none; user-select: none; z-index: 0; white-space: nowrap;
+      }
+
+      @media (max-width: 768px) {
+        .cover h1 { font-size: 38px; }
+        .cover-meta { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .two { grid-template-columns: 1fr; }
+        .kpis { grid-template-columns: repeat(2, 1fr); }
+        .roadmap { grid-template-columns: 1fr; }
+        .phase { border-right: 0; border-bottom: 1px solid var(--hr-line); }
+        .watermark { font-size: 70px; }
+      }
+      @media print {
+        .watermark, .mast-meta, .back-link, footer .back-link { display: none; }
+        section { break-inside: avoid; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="watermark">ILLUSTRATIVE</div>
+
+    <div class="mast">
+      <div class="wrap mast-inner">
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <span class="brand-text">HITACHI Solutions<em>Inspire the Next</em></span>
+        </div>
+        <div class="mast-meta">CLIENT CONFIDENTIAL · DRAFT</div>
+      </div>
+    </div>
+
+    <div class="doc-tag">
+      <div class="wrap">Programme Solution Design · Analytics Practice · Ref: HSE-NWRG-2026-11</div>
+    </div>
+
+    <!-- Cover -->
+    <div class="wrap cover">
+      <h1>
+        Northwind Retail Group
+        <span class="rule"></span>
+        Analytics Modernisation Proposal
+      </h1>
+      <p class="lede">
+        A phased migration from legacy SSRS and on-premises SQL Server to a governed
+        Microsoft Fabric data estate — unlocking near-real-time store performance
+        insight, a single customer view, and a credible foundation for AI-assisted
+        merchandising within twelve months.
+      </p>
+      <div class="cover-meta">
+        <div>
+          <div class="label">Prepared for</div>
+          <div class="val">Northwind Retail Group<br/>CFO &amp; CIO sponsors</div>
+        </div>
+        <div>
+          <div class="label">Prepared by</div>
+          <div class="val">Hitachi Solutions Europe<br/>Analytics Practice</div>
+        </div>
+        <div>
+          <div class="label">Lead Analytics Architect</div>
+          <div class="val">Huzaifa Patel</div>
+        </div>
+        <div>
+          <div class="label">Version · Date</div>
+          <div class="val">0.3 (Internal Review)<br/>13 Nov 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. Executive Summary -->
+    <section>
+      <div class="wrap">
+        <h2><span class="num">01 · Executive Summary</span>From ten-day refresh cycles to tomorrow-morning decisions.</h2>
+        <p>
+          Northwind Retail Group operates 180 UK stores with an estate built on
+          SQL Server 2016, SSIS and SSRS. Reporting runs overnight, store
+          managers receive yesterday's data, and strategic questions —
+          basket-level margin, promotion attribution, cross-store transfer
+          optimisation — require week-long data-team engagements.
+        </p>
+        <p>
+          We propose a three-phase migration to Microsoft Fabric, delivered by a
+          Hitachi Solutions Analytics squad embedded with your BI team.
+          Phase 1 lands a governed Lakehouse and like-for-like report parity.
+          Phase 2 introduces semantic modelling and self-service via Power BI.
+          Phase 3 activates advanced analytics — demand forecasting, dynamic
+          pricing, D365-integrated clienteling.
+        </p>
+        <div class="kpis">
+          <div class="kpi"><div class="big">£1.8m</div><div class="label">net value, Year 1 (indicative)</div></div>
+          <div class="kpi"><div class="big">24h → 15min</div><div class="label">insight latency, store KPIs</div></div>
+          <div class="kpi"><div class="big">12 mo</div><div class="label">to steady-state</div></div>
+          <div class="kpi"><div class="big">4 FTE</div><div class="label">average squad size</div></div>
+        </div>
+        <p class="indicative">Value projection based on sector benchmarks and Northwind's self-reported
+          promotion margin leakage of ~2.1%. Validated during Phase 0 discovery.</p>
+      </div>
+    </section>
+
+    <!-- 2. Current State -->
+    <section>
+      <div class="wrap">
+        <h2><span class="num">02 · Discovery — Current State</span>What we heard, what we found.</h2>
+        <p>
+          Three days of discovery with the IT Director, Head of BI, Finance
+          Business Partner and two Regional Managers surfaced a consistent
+          pattern: the data exists, the surface area is wrong.
+        </p>
+        <div class="two">
+          <div class="card">
+            <div class="tag">Pain</div>
+            <h4>Reporting latency blocks decision-making</h4>
+            <ul>
+              <li>Overnight SSIS loads to the warehouse; no intraday refresh</li>
+              <li>36 overlapping SSRS reports, inconsistent definitions of "revenue"</li>
+              <li>"We don't trust the headline" — Head of BI</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="tag">Pain</div>
+            <h4>Data silos across Dynamics, Shopify and the EPOS estate</h4>
+            <ul>
+              <li>Customer profile fragmented across D365 CE, Shopify and in-store loyalty</li>
+              <li>No single customer ID; promotion attribution is spreadsheet-driven</li>
+              <li>Finance reconciles monthly, 5–7 days of effort per close</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="tag">Opportunity</div>
+            <h4>Microsoft estate commitment is already paid for</h4>
+            <ul>
+              <li>Existing E5 licences cover Fabric capacity at F64 tier</li>
+              <li>Dynamics 365 Commerce + CE + F&amp;O already in flight</li>
+              <li>No net-new procurement path required — faster board approval</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="tag">Opportunity</div>
+            <h4>Appetite from the CFO for a measurable business case</h4>
+            <ul>
+              <li>CFO has committed to tracking three KPIs against the engagement</li>
+              <li>Store Ops has ring-fenced 2 hours/week of RM time for co-design</li>
+              <li>Executive sponsor at board level reduces change-management drag</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Target Architecture -->
+    <section>
+      <div class="wrap">
+        <h2><span class="num">03 · Target State</span>A Microsoft Fabric estate, governed from day one.</h2>
+        <p>
+          We propose a medallion-architected Lakehouse in Microsoft Fabric,
+          fed by a hybrid ingestion layer: Azure Data Factory for structured
+          enterprise sources (D365 F&amp;O, F&amp;O Dataverse, EPOS extracts,
+          SAP for finance), Fabric Dataflows Gen2 for lightweight business
+          user ingest, and Azure Event Hubs for the EPOS near-real-time stream.
+        </p>
+
+        <div class="arch-wrap">
+          <svg viewBox="0 0 980 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Target-state Microsoft Fabric architecture">
+            <defs>
+              <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="#5a5e67"/>
+              </marker>
+              <style>
+                .box { fill: #fff; stroke: #15161a; stroke-width: 1.4; rx: 6; }
+                .box-ms { fill: #fff; stroke: #0078d4; stroke-width: 1.6; }
+                .box-hs { fill: #fff; stroke: #e60027; stroke-width: 1.6; }
+                .lane { fill: #f6f7fa; stroke: #e2e4ea; stroke-width: 1; }
+                .ln-label { font: 700 11px 'Noto Sans', sans-serif; fill: #5a5e67; letter-spacing: 0.1em; }
+                .lbl { font: 600 12px 'Noto Sans', sans-serif; fill: #15161a; }
+                .sub { font: 400 10px 'Noto Sans', sans-serif; fill: #5a5e67; }
+                .flow { stroke: #5a5e67; stroke-width: 1.3; fill: none; }
+                .flow-stream { stroke: #e60027; stroke-width: 1.6; fill: none; stroke-dasharray: 4 3; }
+              </style>
+            </defs>
+
+            <!-- Lanes -->
+            <rect class="lane" x="10"  y="30" width="200" height="420"/>
+            <rect class="lane" x="225" y="30" width="200" height="420"/>
+            <rect class="lane" x="440" y="30" width="300" height="420"/>
+            <rect class="lane" x="755" y="30" width="215" height="420"/>
+            <text class="ln-label" x="110" y="48" text-anchor="middle">SOURCES</text>
+            <text class="ln-label" x="325" y="48" text-anchor="middle">INGESTION</text>
+            <text class="ln-label" x="590" y="48" text-anchor="middle">MICROSOFT FABRIC · LAKEHOUSE</text>
+            <text class="ln-label" x="862" y="48" text-anchor="middle">CONSUMPTION</text>
+
+            <!-- Sources -->
+            <g>
+              <rect class="box" x="30" y="70"  width="160" height="46"/><text class="lbl" x="110" y="90" text-anchor="middle">D365 F&amp;O</text><text class="sub" x="110" y="106" text-anchor="middle">finance, inventory</text>
+              <rect class="box" x="30" y="128" width="160" height="46"/><text class="lbl" x="110" y="148" text-anchor="middle">D365 Commerce</text><text class="sub" x="110" y="164" text-anchor="middle">stores, orders</text>
+              <rect class="box" x="30" y="186" width="160" height="46"/><text class="lbl" x="110" y="206" text-anchor="middle">D365 CE</text><text class="sub" x="110" y="222" text-anchor="middle">customer, loyalty</text>
+              <rect class="box" x="30" y="244" width="160" height="46"/><text class="lbl" x="110" y="264" text-anchor="middle">Shopify</text><text class="sub" x="110" y="280" text-anchor="middle">web storefront</text>
+              <rect class="box" x="30" y="302" width="160" height="46"/><text class="lbl" x="110" y="322" text-anchor="middle">EPOS feed</text><text class="sub" x="110" y="338" text-anchor="middle">near-real-time</text>
+              <rect class="box" x="30" y="360" width="160" height="46"/><text class="lbl" x="110" y="380" text-anchor="middle">SAP (Finance)</text><text class="sub" x="110" y="396" text-anchor="middle">GL &amp; AP</text>
+            </g>
+
+            <!-- Ingestion -->
+            <g>
+              <rect class="box-ms" x="245" y="90"  width="160" height="50"/><text class="lbl" x="325" y="113" text-anchor="middle">Azure Data Factory</text><text class="sub" x="325" y="129" text-anchor="middle">batch ingest</text>
+              <rect class="box-ms" x="245" y="186" width="160" height="50"/><text class="lbl" x="325" y="209" text-anchor="middle">Dataflows Gen2</text><text class="sub" x="325" y="225" text-anchor="middle">self-service</text>
+              <rect class="box-ms" x="245" y="282" width="160" height="50"/><text class="lbl" x="325" y="305" text-anchor="middle">Azure Event Hubs</text><text class="sub" x="325" y="321" text-anchor="middle">EPOS streaming</text>
+              <rect class="box-ms" x="245" y="360" width="160" height="50"/><text class="lbl" x="325" y="383" text-anchor="middle">Dataverse Link</text><text class="sub" x="325" y="399" text-anchor="middle">D365 to Fabric</text>
+            </g>
+
+            <!-- Fabric lakehouse medallion -->
+            <g>
+              <rect class="box-ms" x="455" y="80" width="270" height="76"/><text class="lbl" x="590" y="112" text-anchor="middle">Bronze — Raw landing</text><text class="sub" x="590" y="130" text-anchor="middle">OneLake · Delta Parquet</text><text class="sub" x="590" y="146" text-anchor="middle">immutable, source-mirrored</text>
+              <rect class="box-ms" x="455" y="172" width="270" height="76"/><text class="lbl" x="590" y="204" text-anchor="middle">Silver — Conformed</text><text class="sub" x="590" y="222" text-anchor="middle">SCD2 dims, deduplicated facts</text><text class="sub" x="590" y="238" text-anchor="middle">governed by Purview</text>
+              <rect class="box-ms" x="455" y="264" width="270" height="76"/><text class="lbl" x="590" y="296" text-anchor="middle">Gold — Semantic layer</text><text class="sub" x="590" y="314" text-anchor="middle">star schemas, KPI definitions</text><text class="sub" x="590" y="330" text-anchor="middle">direct-lake Power BI</text>
+              <rect class="box-hs" x="455" y="356" width="270" height="56"/><text class="lbl" x="590" y="378" text-anchor="middle">ML — Forecasting &amp; Scoring</text><text class="sub" x="590" y="396" text-anchor="middle">Fabric Data Science · AzureML</text>
+            </g>
+
+            <!-- Consumption -->
+            <g>
+              <rect class="box-ms" x="775" y="90"  width="175" height="50"/><text class="lbl" x="862" y="113" text-anchor="middle">Power BI</text><text class="sub" x="862" y="129" text-anchor="middle">store KPIs, finance</text>
+              <rect class="box-ms" x="775" y="162" width="175" height="50"/><text class="lbl" x="862" y="185" text-anchor="middle">D365 CE Clienteling</text><text class="sub" x="862" y="201" text-anchor="middle">Customer 360</text>
+              <rect class="box-ms" x="775" y="234" width="175" height="50"/><text class="lbl" x="862" y="257" text-anchor="middle">D365 Commerce</text><text class="sub" x="862" y="273" text-anchor="middle">dynamic pricing</text>
+              <rect class="box-hs" x="775" y="306" width="175" height="50"/><text class="lbl" x="862" y="329" text-anchor="middle">Copilot / NL Query</text><text class="sub" x="862" y="345" text-anchor="middle">Phase 3</text>
+              <rect class="box" x="775" y="378" width="175" height="50"/><text class="lbl" x="862" y="401" text-anchor="middle">APIs / Export</text><text class="sub" x="862" y="417" text-anchor="middle">partners, SAP</text>
+            </g>
+
+            <!-- Flows -->
+            <path class="flow" d="M190,93  C 215,93  220,115 245,115" marker-end="url(#arr)"/>
+            <path class="flow" d="M190,151 C 215,151 220,115 245,115" marker-end="url(#arr)"/>
+            <path class="flow" d="M190,209 C 215,209 220,211 245,211" marker-end="url(#arr)"/>
+            <path class="flow" d="M190,267 C 215,267 220,211 245,211" marker-end="url(#arr)"/>
+            <path class="flow-stream" d="M190,325 C 215,325 220,307 245,307" marker-end="url(#arr)"/>
+            <path class="flow" d="M190,383 C 215,383 220,385 245,385" marker-end="url(#arr)"/>
+
+            <path class="flow" d="M405,115 C 430,115 440,118 455,118" marker-end="url(#arr)"/>
+            <path class="flow" d="M405,211 C 430,211 440,210 455,210" marker-end="url(#arr)"/>
+            <path class="flow-stream" d="M405,307 C 430,307 440,118 455,118" marker-end="url(#arr)"/>
+            <path class="flow" d="M405,385 C 430,385 440,210 455,210" marker-end="url(#arr)"/>
+
+            <path class="flow" d="M590,156 L 590,172" marker-end="url(#arr)"/>
+            <path class="flow" d="M590,248 L 590,264" marker-end="url(#arr)"/>
+            <path class="flow" d="M590,340 L 590,356" marker-end="url(#arr)"/>
+
+            <path class="flow" d="M725,302 C 750,302 760,115 775,115" marker-end="url(#arr)"/>
+            <path class="flow" d="M725,302 C 750,302 760,187 775,187" marker-end="url(#arr)"/>
+            <path class="flow" d="M725,384 C 750,384 760,259 775,259" marker-end="url(#arr)"/>
+            <path class="flow-stream" d="M725,384 C 750,384 760,331 775,331" marker-end="url(#arr)"/>
+            <path class="flow" d="M725,302 C 750,302 760,403 775,403" marker-end="url(#arr)"/>
+          </svg>
+          <div class="arch-caption">Fig. 3.1 — Target-state architecture. Red boxes: Hitachi-delivered components. Blue boxes: Microsoft-stack native. Dashed lines: near-real-time streaming path.</div>
+        </div>
+
+        <h3>Design principles we will hold to</h3>
+        <ul>
+          <li><strong>Governed from day one.</strong> Purview catalogue + lineage from Phase 1; no "we'll do governance later".</li>
+          <li><strong>One source of truth per KPI.</strong> KPI definitions locked at the semantic layer; Power BI reports consume, they don't redefine.</li>
+          <li><strong>Direct-lake, not import.</strong> Power BI datasets read Gold directly to avoid dataset-drift and refresh storms.</li>
+          <li><strong>SCD2 on core dimensions</strong> (store, product, customer) so trend analysis survives reorganisations.</li>
+          <li><strong>Reversible deployments.</strong> Infrastructure-as-code (Bicep + Fabric Deployment Pipelines); nothing clicked in a portal.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. Roadmap -->
+    <section>
+      <div class="wrap">
+        <h2><span class="num">04 · Delivery Roadmap</span>Three phases over twelve months.</h2>
+        <div class="roadmap">
+          <div class="phase">
+            <span class="ph-num">PHASE 0</span>
+            <h4>Discovery &amp; Mobilisation</h4>
+            <div class="dur">4 weeks</div>
+            <ul>
+              <li>KPI catalogue workshops</li>
+              <li>Source-system inventory</li>
+              <li>Fabric capacity sizing</li>
+              <li>Governance target operating model</li>
+              <li>Value hypothesis per KPI</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-num">PHASE 1</span>
+            <h4>Lakehouse &amp; Report Parity</h4>
+            <div class="dur">Weeks 5–20</div>
+            <ul>
+              <li>Fabric workspace &amp; Purview stand-up</li>
+              <li>Bronze/Silver layer for D365 estate</li>
+              <li>Like-for-like SSRS → Power BI parity</li>
+              <li>Decommission plan for legacy SSRS</li>
+              <li>First 3 KPIs live with lineage</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-num">PHASE 2</span>
+            <h4>Semantic Layer &amp; Self-Service</h4>
+            <div class="dur">Weeks 21–36</div>
+            <ul>
+              <li>Gold semantic models (sales, stock, customer)</li>
+              <li>Store Manager app (Power BI mobile)</li>
+              <li>Monthly close acceleration (5d → 2d target)</li>
+              <li>Dataflows Gen2 for finance BPs</li>
+              <li>CoE operating model &amp; training</li>
+            </ul>
+          </div>
+          <div class="phase">
+            <span class="ph-num">PHASE 3</span>
+            <h4>Advanced Analytics</h4>
+            <div class="dur">Weeks 37–52</div>
+            <ul>
+              <li>Demand forecasting (SKU × store × week)</li>
+              <li>Dynamic pricing pilot, 20-store cohort</li>
+              <li>D365 CE clienteling integration</li>
+              <li>Copilot / NL query on Gold</li>
+              <li>Benefits realisation review</li>
+            </ul>
+          </div>
+        </div>
+        <p class="indicative">Phases overlap. A Hitachi Lead Consultant is accountable for each phase gate;
+          Northwind retains authority on go/no-go at every gate.</p>
+      </div>
+    </section>
+
+    <!-- 5. Commercials -->
+    <section>
+      <div class="wrap">
+        <h2><span class="num">05 · Indicative Commercials</span>T&amp;M with a fixed-price Phase 1.</h2>
+        <p>
+          Our preference is a fixed-price Phase 1 to de-risk mobilisation for
+          Northwind's board, followed by T&amp;M for Phase 2–3 against a jointly
+          maintained backlog. This structure is proven on comparable Hitachi
+          retail engagements.
+        </p>
+        <table class="commercials">
+          <thead>
+            <tr><th>Phase</th><th>Duration</th><th>Squad (avg FTE)</th><th>Commercial model</th><th>Indicative fees</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Phase 0 — Discovery</td><td>4 weeks</td><td>2.0</td><td>Fixed price</td><td>£72k</td></tr>
+            <tr><td>Phase 1 — Lakehouse &amp; parity</td><td>16 weeks</td><td>4.5</td><td>Fixed price</td><td>£620k</td></tr>
+            <tr><td>Phase 2 — Semantic &amp; self-service</td><td>16 weeks</td><td>3.5</td><td>T&amp;M, capped</td><td>£480k</td></tr>
+            <tr><td>Phase 3 — Advanced analytics</td><td>16 weeks</td><td>4.0</td><td>T&amp;M</td><td>£560k</td></tr>
+            <tr><td>Managed service — Year 2+</td><td>ongoing</td><td>1.5</td><td>Monthly retainer</td><td>£28k / month</td></tr>
+            <tr class="total"><td colspan="4">Year 1 total (indicative)</td><td>£1.73m</td></tr>
+          </tbody>
+        </table>
+        <p class="indicative">Fees exclude Microsoft Fabric capacity (covered by Northwind's existing E5 estate at F64 tier) and third-party licensing.
+          Figures validated during Phase 0; variance envelope ±15% is standard for engagements of this shape.</p>
+      </div>
+    </section>
+
+    <!-- 6. Why Hitachi -->
+    <section>
+      <div class="wrap">
+        <h2><span class="num">06 · Why Hitachi Solutions</span>Microsoft-first, retail-deep, outcome-accountable.</h2>
+        <div class="two">
+          <div class="card">
+            <div class="tag">01</div>
+            <h4>Microsoft Gold &amp; Cloud Services partner</h4>
+            <ul>
+              <li>Fabric Launch Partner, Power Platform Inner Circle</li>
+              <li>Direct engineering escalation into Redmond</li>
+              <li>Pattern library curated from 40+ UK retail engagements</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="tag">02</div>
+            <h4>End-to-end D365 &amp; data under one roof</h4>
+            <ul>
+              <li>No sub-contracted analytics; same account team for the Dynamics work</li>
+              <li>Clienteling &amp; dynamic pricing land faster when the architects share a bench</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="tag">03</div>
+            <h4>Outcome-accountable commercials</h4>
+            <ul>
+              <li>Phase-gated fixed-price Phase 1 de-risks board approval</li>
+              <li>Benefits realisation measured against the three KPIs the CFO committed to</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="tag">04</div>
+            <h4>Flat-hierarchy delivery culture</h4>
+            <ul>
+              <li>Lead architect embedded for the full 12 months — not rotated</li>
+              <li>Direct exec sponsorship inside Hitachi for your programme</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Next steps -->
+    <section>
+      <div class="wrap">
+        <h2><span class="num">07 · Next Steps</span>What we'd like to see happen next.</h2>
+        <ul>
+          <li>Executive readout of this proposal with Northwind CFO, CIO and Head of BI — we propose w/c 24 November.</li>
+          <li>Sign-off on Phase 0 discovery statement of work — 2 weeks from readout.</li>
+          <li>Phase 0 mobilisation and KPI workshops — target start 8 December.</li>
+          <li>Phase 1 fixed-price proposal issued at Phase 0 gate (early January).</li>
+        </ul>
+        <p>
+          We look forward to partnering with Northwind Retail Group on this
+          programme. Hitachi Solutions Europe is ready to mobilise the team
+          described above on signature of the Phase 0 SoW.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div>
+          <strong>Hitachi Solutions Europe Ltd.</strong><br/>
+          Analytics Practice · Microsoft Gold Partner<br/>
+          Document ref: HSE-NWRG-2026-11 · Classification: Client Confidential · Draft
+        </div>
+        <div>
+          <strong>Illustrative deliverable</strong><br/>
+          Northwind Retail Group is a fictional client used to demonstrate the Analytics<br/>
+          Architect workflow for a Hitachi Solutions role application by Huzaifa Patel.<br/>
+          <a class="back-link" href={`/apply/${SLUG}/`}>← Back to application pitch</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
